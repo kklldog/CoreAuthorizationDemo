@@ -20,12 +20,18 @@ namespace CoreAuthorization.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromForm]string userName, [FromForm]string role)
+        public async Task<IActionResult> Login(
+            [FromForm]string userName, 
+            [FromForm]string role,
+            [FromForm]string sex,
+            [FromForm]string lastName)
         {
             var claims = new List<Claim>
                 {
                   new Claim(ClaimTypes.Name, userName),
-                  new Claim(ClaimTypes.Role, role)
+                  new Claim(ClaimTypes.Role, role),
+                  new Claim("Sex", sex),
+                  new Claim("LastName", lastName)
                 };
 
             var claimsIdentity = new ClaimsIdentity(

@@ -15,7 +15,13 @@ namespace CoreAuthorization.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return Content("Teacher index");
+        }
+
+        [Authorize(Policy="王老师")]
+        public IActionResult Edit()
+        {
+            return Content("Edit success");
         }
 
     }

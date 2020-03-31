@@ -1,7 +1,40 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using Microsoft.AspNetCore.Authorization;
 
-    <h1>
-        Home Page
-    </h1>
+
+    <h2>
+        CoreAuthorization
+    </h2>
+
+<p>
+    @Context.User.FindFirst(System.Security.Claims.ClaimTypes.Name).Value
+</p>
+<p>
+    角色:
+    @foreach (var claims in Context.User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role))
+    {
+        <span> @claims.Value </span>
+    }
+</p>
+<p>
+    性别:<span> @Context.User.FindFirst("Sex").Value </span>
+</p>
+<p>
+    姓:<span> @Context.User.FindFirst("LastName").Value </span>
+</p>
+
+<p>
+    <a href="/Student/index">/Student/index</a>
+</p>
+<p>
+    <a href="/Teacher/index">/Teacher/Index</a>
+</p>
+<p>
+    <a href="/Teacher/Edit">/Student/Edit</a>
+</p>
+
+<p>
+    <a href="/Account/Logoff">退出</a>
+</p>
